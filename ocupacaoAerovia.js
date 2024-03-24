@@ -1,25 +1,69 @@
 import { validate, typedef } from "bycontract";
-import { ServicoAerovias } from "./servicoAerovias.js";
-import { ServicoPlanos } from "./servicoPlanos.js";
+import { Aerovia } from "./aerovia.js";
+import nReadlines from "n-readlines";
 
 //Implementação da Classe OcupacaoAerovia:
-export class OcupacaoAerovia{
-    #idAerovia;
-    #data;
+export class OcupacaoAerovia {
+    #aerovia
 
-    constructor(idAerovia){
-        validate(arguments,["number"]);
-        this.#idAerovia = idAerovia;
+    constructor(arquivo){
+        validate(arquivo, "string");
+        this.#aerovia = [];
+        this.carregaDados(arquivo);
+    }
+    //Carregamento dos dados: leitura de dados
+    carregaDados(arquivo) {
+        validate(arquivo, "string");
+        let arq = new nReadlines(arquivo);
+        let buf = "";
+        let line = "";
+        let dados = "";
+
+        arq.next();
+        while(buf = arq.next()) {
+            line = buf.toString('utf8');
+            dados = line.split(",");
+            let id = Number(parseInt(dados[0]));
+            console.log("ID: " + id);
+            let origem = dados[1];
+            let destino = dados[2];
+            let tamanho = Number(parseInt(dados[3]));
+            let aerovia = new Aerovia(id, origem, destino, tamanho);
+            this.#aerovia.push(aerovia);
+        }
+    }
+// Getters e Setters
+    get aerovia(){
+        return this.#aerovia.values();
     }
 
+    // Refatorar
     altitudesOcupadas(idAerovia, data){
-        let altitudes = new Array();
-        for (let i = 0; i < ServicoPlanos.id.length; i++){
-            if (ServicoAerovias.aerovias[i].id == idAerovia && ServicoAerovias.aerovias[i].data == data){
-                altitudes.push(ServicoAerovias.aerovias[i].altitude);
-            }
-        }
-        return altitudes;
 
+    }
+
+
+    // Refatorar
+    slotsOcupados(idAerovia){
+        if (this.#aerovia == idAerovia){
+        }
+    }
+
+    // Refatorar
+    ocupa(idAerovia, data, altitude, slot){
+        // se aerovia estiver livre
+    }
+
+    // Refatorar
+    libera(idAerovia, data, altitude, slot){
+        // se aerovia estiver ocupada, cancelar plano de voo e liberar
+    }
+
+    isOcupado(idAerovia, data, altitude, slot){
+        // se aerovia estiver ocupada, retornar true
+    }
+
+    toString(){
+        return `OcupacaoAerovia: ${this.#aerovia}`;
     }
 }

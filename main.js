@@ -18,14 +18,11 @@ import { AeronaveCarga } from "./aeronaveCarga.js";
 
 
 //Testes:
+let sp = new ServicoPilotos("pilotos.csv");
+console.log (sp.pilotos);
 
-let piloto = new Piloto("123", "Pedro", true);
-let piloto2 = new Piloto("321", "Maria", false);
-let sp = new ServicoPilotos();
-sp.addPiloto(piloto);
-sp.addPiloto(piloto2);
-console.log(sp.recupera("321"));
-console.log(sp.todos());
+// console.log(sp.recupera("321"));
+// console.log(sp.todos());
 
 let a = new Aeronave("ABC", 100, 1000);
 console.log(a.toString());

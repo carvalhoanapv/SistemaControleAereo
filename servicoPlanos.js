@@ -36,4 +36,3 @@ export class ServicoPlanos {
     }
 
 }
-/Users/anapa/Documents/PUCRS/JavaScript_PUCRS_Trabalho_pt1/aeronaveParticular.js
